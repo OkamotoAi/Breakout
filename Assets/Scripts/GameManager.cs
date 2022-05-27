@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     GameObject lifeText;
     GameObject statusText;
+    GameObject title;
+    GameObject again;
     int life=3; //ライフ
     int blockCount; //残ブロック数を覚えておく変数
     bool playing = true;
@@ -28,6 +30,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
+        title = GameObject.Find("TITLE");
+        again = GameObject.Find("AGAIN");
+        title.SetActive(false);
+        again.SetActive(false);
+        // Columns = Random.Range(3,8);
+        // Rows = Random.Range(4,15);
         // block = Instantiate (blockPrefab, new Vector3(0f, 0.5f, 2f), Quaternion.identity) as GameObject;
         GameObject ground = GameObject.Find("Ground"); //床オブジェクトを探す 
         Vector3 g_size = ground.transform.localScale; //⻑いので短い変数に入れ直し 
@@ -108,8 +117,12 @@ public class GameManager : MonoBehaviour
         Debug.Log("Game Over!"); 
         statusText.GetComponent<Text> ().text = "GAME OVER!!"; 
         statusText.SetActive (true);
+        title.SetActive(true);
+        again.SetActive(true);
         Time.timeScale = 0f;
         playing = false;
+        // UnityEditor.EditorApplication.isPlaying = false;
+        
     }
 
     public bool DecreaseBlock(){
@@ -117,8 +130,11 @@ public class GameManager : MonoBehaviour
         if(blockCount == 0){
             statusText.GetComponent<Text> ().text = "GAME CLEAR!!"; 
             statusText.SetActive (true);
+            title.SetActive(true);
+            again.SetActive(true);
             Time.timeScale = 0f;
             playing = false;
+            // UnityEditor.EditorApplication.isPlaying = false;
             return true;
         }
         return false;

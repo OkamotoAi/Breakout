@@ -33,7 +33,9 @@ public class BallControl : MonoBehaviour
         {
             gameEnd = gm.GetComponent<GameManager>().DecreaseBlock();
             Destroy (obj.gameObject, 0f);
-            if(gameEnd) Destroy (this.gameObject, 0f);
+            if(gameEnd) {
+                Destroy (this.gameObject, 0f);
+            }
         }else if (obj.gameObject.tag == "Wall") { //”Wall”に当たったら
             Debug.Log("hit the wall");
             Destroy (this.gameObject, 0f); //球(自分自身)を壊す
