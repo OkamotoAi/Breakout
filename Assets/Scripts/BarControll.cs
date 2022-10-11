@@ -5,6 +5,9 @@ using UnityEngine;
 public class BarControll : MonoBehaviour
 {
     GameObject ground;
+    GameObject item;
+    Vector3 v;
+    int status;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +28,13 @@ public class BarControll : MonoBehaviour
             if(transform.position.x+transform.localScale.x/2 < ground.transform.localScale.x/2)
                 transform.Translate (0.1f, 0f, 0f); //右(X軸正方向)に少し動かす
         }
+    }
 
-
-        
+    void OnTriggerEnter(Collider obj){ 
+        if (obj.gameObject.tag == "Item")
+        {
+            this.transform.localScale = new Vector3(this.transform.localScale.x * 1.2f,this.transform.localScale.y,this.transform.localScale.z);
+            Destroy (obj.gameObject, 0f);
+        }
     }
 }

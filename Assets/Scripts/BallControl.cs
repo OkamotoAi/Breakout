@@ -6,8 +6,10 @@ public class BallControl : MonoBehaviour
 {
     public float speed = 20;
     GameObject gm; //ゲームマネージャ
+    public GameObject Item;
     private bool gameEnd = false;
     bool isActive = false;
+    Vector3 itempos;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,10 +33,14 @@ public class BallControl : MonoBehaviour
     void OnCollisionEnter(Collision obj){ 
         if (obj.gameObject.tag == "Block")
         {
+            itempos = obj.gameObject.transform.position;
             gameEnd = gm.GetComponent<GameManager>().DecreaseBlock();
             Destroy (obj.gameObject, 0f);
             if(gameEnd) {
                 Destroy (this.gameObject, 0f);
+            }
+            if(true){
+                Invoke("GenerateItem",0.5f);
             }
         }else if (obj.gameObject.tag == "Wall") { //”Wall”に当たったら
             Debug.Log("hit the wall");
@@ -53,7 +59,10 @@ public class BallControl : MonoBehaviour
         }
         isActive = true;
         
-        
+    }
+
+    public void GenerateItem(){
+        Instantiate(Item, itempos, Quaternion.identity);
     }
     
     

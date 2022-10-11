@@ -26,5 +26,9 @@ public class ButtonControll : MonoBehaviour
         SceneManager.LoadScene ("New Scene");
     }
 
+    public void Exit(){
+        UnityEditor.EditorApplication.isPlaying = false;
+    }
+
 
 }

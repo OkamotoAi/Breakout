@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         again = GameObject.Find("AGAIN");
         title.SetActive(false);
         again.SetActive(false);
+        
         // Columns = Random.Range(3,8);
         // Rows = Random.Range(4,15);
         // block = Instantiate (blockPrefab, new Vector3(0f, 0.5f, 2f), Quaternion.identity) as GameObject;
@@ -61,6 +62,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(title.activeSelf);
         if (Input.GetKey (KeyCode.Space)) {
             if (ball != null) {
                 this.statusText.SetActive (false);
@@ -134,7 +136,6 @@ public class GameManager : MonoBehaviour
             again.SetActive(true);
             Time.timeScale = 0f;
             playing = false;
-            // UnityEditor.EditorApplication.isPlaying = false;
             return true;
         }
         return false;
